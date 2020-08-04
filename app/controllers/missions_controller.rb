@@ -1,6 +1,6 @@
 class MissionsController < ApplicationController
   before_action :must_be_logged, only: %i[new create edit update destroy prepare_assets add_assets extract_asset remove_asset]
-  before_action :must_be_proprietary, only: %i[update prepare_assets add_assets extract_asset]
+  before_action :must_be_proprietary, only: %i[update prepare_assets extract_asset]
   before_action :get_mission, only: %i[show edit update prepare_assets add_assets extract_asset remove_asset]
   before_action :get_asset_mission, only: %i[extract_asset remove_asset]
 
