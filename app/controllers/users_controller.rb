@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     if user_params.key?(:password) && user_params.key?(:password_confirmation)
       @user.password = user_params['password']
       @user.password_confirmation = user_params['password_confirmation']
-      if @user.password == @user.password_confirmation && @user.password != null 
+      if @user.password == @user.password_confirmation 
         @user.gen_token_and_salt
         @user.change_password(@user.password)
       end
