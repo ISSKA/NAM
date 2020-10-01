@@ -36,6 +36,7 @@ class UsersController < ApplicationController
         @user.change_password(@user.password)
       end
     end
+
     if @user.update(user_params.except(:password, :password_confirmation))
       flash[:success] = 'Profil successfully updated.'
       redirect_to user_path(@user.id)

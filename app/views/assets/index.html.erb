@@ -57,7 +57,7 @@
         -
         <% end %>
       </td>
-      <th><%= asset.user.firstname.capitalize %></th>
+      <th><% if asset.user != nil%><%=asset.user.firstname.capitalize %><% else%><%= "Deleted user" %><%end %></th>
       <td colspan="2">
         <%= link_to 'show', asset_path(asset), class: "btn btn-primary btn-xs" %>
       </td>

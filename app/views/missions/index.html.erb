@@ -27,7 +27,7 @@
       <td><%= mission.starting_date.strftime("%d.%m.%Y") %></td>
       <td><%= mission.ending_date ? mission.ending_date.strftime("%d.%m.%Y") : '-' %></td>
       <th><%= mission.get_current_assets.count %></th>
-      <th><%= mission.user.firstname.capitalize %></th>
+      <th><% if mission.user != nil%><%=mission.user.firstname.capitalize %><% else%><%= "Deleted user" %><%end %></th>
       <td colspan="2">
         <%= link_to 'show', mission_path(mission), class: "btn btn-primary btn-xs" %>
       </td>

@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20191220081703) do
 
-  create_table "asset_missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "asset_missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
     t.integer "measurement_interval"
     t.integer "measurement_duration"
     t.text "comments"
@@ -32,14 +32,14 @@ ActiveRecord::Schema.define(version: 20191220081703) do
     t.index ["user_id"], name: "index_asset_missions_on_user_id"
   end
 
-  create_table "asset_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "asset_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "assets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
     t.text "description"
     t.text "product_serial"
     t.integer "battery_life"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20191220081703) do
     t.index ["user_id"], name: "index_assets_on_user_id"
   end
 
-  create_table "battery_replacements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "battery_replacements", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
     t.bigint "user_id"
     t.bigint "asset_id"
     t.datetime "created_at", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20191220081703) do
     t.index ["user_id"], name: "index_battery_replacements_on_user_id"
   end
 
-  create_table "missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
     t.string "project_name"
     t.text "description"
     t.datetime "starting_date"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20191220081703) do
     t.index ["user_id"], name: "index_missions_on_user_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "mail"

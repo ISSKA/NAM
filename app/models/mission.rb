@@ -23,4 +23,5 @@ class Mission < ApplicationRecord
     end
     return current_asset
   end
+
 end
