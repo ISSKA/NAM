@@ -13,15 +13,34 @@ class AssetMission < ApplicationRecord
     if placed_at && extracted_at && placed_at > extracted_at
       errors.add(:base, "can't be anterior the placed date")
     end
+    if extracted_at != nil
+        if extracted_at > DateTime.now
+             errors.add(:base, "can't be in the future" )
+        end
+        
+    end
+
   end
 
   def one_asset_per_mission_at_a_time
-    # if self.asset.has_current_mission && self.extracted_at_was != nil
-    if asset.get_current_missions.length > 1
-      asset.get_current_missions.each do |conflict_mission|
-        errors.add(:base, 'Conflict with mission ' + conflict_mission.description)
-        break
-      end
+    asset.get_missions.each do |mission|
+        if mission.extracted_at != nil && mission != self
+            if self.placed_at < mission.extracted_at && self.placed_at > mission.placed_at
+                errors.add(:base, 'Conflict with mission ')
+                break
+            end
+        end
+        if self.extracted_at != nil && mission != self
+            if self.extracted_at > mission.placed_at && mission.extracted_at == nil
+	            errors.add(:base, 'Conflict with mission ')
+                break
+            end
+            if self.extracted_at > mission.placed_at && mission.extracted_at > self.extracted_at
+                errors.add(:base, 'Conflict with mission ')
+                break
+            end
+        end
+
     end
   end
 
