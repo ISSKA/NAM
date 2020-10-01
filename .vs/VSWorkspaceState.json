@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\assets",
+    "\\app\\assets\\config",
+    "\\app\\controllers",
+    "\\app\\models",
+    "\\app\\views",
+    "\\app\\views\\assets",
+    "\\app\\views\\asset_mission",
+    "\\app\\views\\missions",
+    "\\app\\views\\users"
+  ],
+  "SelectedNode": "\\app\\views\\users\\_form_new.html.erb",
+  "PreviewInSolutionExplorer": false
+}

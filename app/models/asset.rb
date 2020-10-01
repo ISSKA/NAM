@@ -52,4 +52,9 @@ class Asset < ApplicationRecord
     current_mission.uniq
     return current_mission
   end
+
+  def get_missions
+    return asset_missions
+  end
+
 end

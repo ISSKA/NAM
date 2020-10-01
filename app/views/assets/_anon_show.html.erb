@@ -2,7 +2,7 @@
   <div class="row">
     <label class="col-sm-4 col-md-4">Owner</label>
     <div class="col-sm-8 col-md-8">
-      <%= @asset.user.firstname.capitalize %> <%= @asset.user.lastname.capitalize %>
+		<% if @asset.user != nil%><%=@asset.user.firstname.capitalize %><%= @asset.user.lastname.capitalize %><% else%><%= "Deleted user" %><%end %>
     </div>
   </div>
 
