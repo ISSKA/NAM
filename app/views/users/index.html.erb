@@ -1,12 +1,32 @@
-<h1>Tous les utilisateurs</h1>
+<div class="card-pf">
+  <header class="login-pf-header">
+    <h1>
+      Utilisateurs
+    </h1>
+  </header>
 
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.firstname.capitalize() + " " + user.lastname.capitalize(), user %> admin = <%=user.admin %> 
-	  <% if current_logged_user.admin? %>
-        | <%= link_to "supprimer", user, :method => :delete, :confirm => "Etes-vous certain&nbsp;?", :title => "Supprimer" %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+  <table class="table table-striped table-bordered table-hover" id="users_table">
+    <thead>
+      <tr>
+        <th>Prenom</th>
+        <th>Nom</th>
+		<th>Admin</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.firstname.capitalize() %></td>
+      <td><%= user.lastname.capitalize() %></td>
+	  <td><%= user.admin %></td>
+      <td colspan="2">
+	    <% if current_logged_user != nil %>
+		  <% if current_logged_user.admin? %>
+			  <%= link_to "supprimer", user, :method => :delete, :confirm => "Etes-vous certain&nbsp;?", :title => "Supprimer" %>
+		  <% end %>
+		<% end %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
