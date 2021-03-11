@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   before_action :must_be_proprietary, only: %i[edit update show]
+  before_action :admin_user, :only => :destroy
 
+  def index
+    @titre = "Tous les utilisateurs"
+    @users = User.all
+  end
+  
   def new
     add_breadcrumb 'new user'
     @user = User.new
@@ -47,13 +53,19 @@ class UsersController < ApplicationController
   end
 
   def delete
-    add_breadcrumb current_logged_user.firstname, user_path(current_logged_user)
+	@user = User.find_by(id: params[:id])
+    #add_breadcrumb current_logged_user.firstname, user_path(current_logged_user)
+	add_breadcrumb @user.firstname, user_path(@user)
     add_breadcrumb 'delete'
   end
 
   def destroy
-    @user = current_logged_user
-    if @user.destroy && log_out
+    #@user = current_logged_user
+	@user = User.find_by(id: params[:id])
+    if @user.destroy
+	  if @user == current_logged_user
+	    log_out
+	  end
       flash[:success] = 'Account successfully deleted.'
       redirect_to root_path
     else
@@ -66,6 +78,10 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:user_id]) || User.find_by(id: params[:id])
     render_403 if @user != current_logged_user
   end
+  
+  def admin_user
+      redirect_to(root_path) unless current_logged_user.admin?
+    end
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :mail, :avatar, :password, :password_confirmation)
