@@ -122,7 +122,7 @@ class MissionsController < ApplicationController
 
   def must_be_proprietary
     get_mission
-    render_403 if current_logged_user && not (@mission.user == current_logged_user or current_logged_user.admin)
+    render_403 if (current_logged_user && !(@mission.user == current_logged_user or current_logged_user.admin))
   end
 
   def mission_params
