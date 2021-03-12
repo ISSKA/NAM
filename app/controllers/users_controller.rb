@@ -75,6 +75,26 @@ class UsersController < ApplicationController
       redirect_to user_delete_path(@user.id)
     end
   end
+  
+  def set_admin
+    @user = User.find_by(id: params[:user_id])
+	if @user.update_attribute(:admin, true)
+      flash[:success] = 'Action successfully executed.'
+    else
+      flash[:danger] = 'Action failed.'
+    end
+	redirect_to users_path
+  end
+  
+  def remove_admin
+    @user = User.find_by(id: params[:user_id])
+	if @user.update_attribute(:admin, false)
+      flash[:success] = 'Action successfully executed.'
+    else
+      flash[:danger] = 'Action failed.'
+    end
+	redirect_to users_path
+  end
 
   def must_be_proprietary
     @user = User.find_by(id: params[:user_id]) || User.find_by(id: params[:id])
@@ -82,8 +102,8 @@ class UsersController < ApplicationController
   end
   
   def admin_user
-      redirect_to(root_path) unless current_logged_user.admin?
-    end
+    redirect_to(root_path) unless current_logged_user.admin?
+  end
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :mail, :avatar, :password, :password_confirmation)

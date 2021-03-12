@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   ## Users
   resources :users do
     get 'delete' => 'users#delete'
+	get 'set_admin' => 'users#set_admin'
+	get 'remove_admin' => 'users#remove_admin'
   end
   # -------------
 
