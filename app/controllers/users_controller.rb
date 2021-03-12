@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :must_be_proprietary, only: %i[edit update show]
   before_action :admin_user, :only => :destroy
   
-  add_breadcrumb 'utilisateurs', :missions_path
+  add_breadcrumb 'utilisateurs'
 
   def index
     @titre = "Tous les utilisateurs"

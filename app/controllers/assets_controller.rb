@@ -1,6 +1,6 @@
 class AssetsController < ApplicationController
   before_action :must_be_logged, only: %i[new create edit update destroy archive replace_battery]
-  before_action :must_be_proprietary, only: %i[update replace_battery]
+  before_action :must_be_proprietary, only: %i[update destroy replace_battery]
   before_action :get_asset_type, only: [:create]
   before_action :get_asset, only: %i[show edit update archive replace_battery]
 
@@ -107,7 +107,7 @@ class AssetsController < ApplicationController
 
   def must_be_proprietary
     get_asset
-    render_403 if @asset.user != current_logged_user
+    render_403 if not (@asset.user == current_logged_user or current_logged_user.admin)
   end
 
   def asset_params

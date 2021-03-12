@@ -22,8 +22,8 @@
       <td colspan="2">
 	    <% if current_logged_user != nil %>
 		  <% if current_logged_user.admin? %>
-			  <%= link_to "Supprimer", user, :method => :delete, :confirm => "Etes-vous certain&nbsp;?", :title => "Supprimer", class: "btn btn-primary btn-xs" %>
-			  <%= link_to "Donner le statut d'admin", user_set_admin_path(user), class: "btn btn-primary btn-xs" %>
+			  <%= link_to "Supprimer", user, :method => :delete, :confirm => "Etes-vous certain&nbsp;?", :title => "Supprimer", class: "btn btn-danger" %>
+			  <%= link_to "Donner le statut d'admin", user_set_admin_path(user), class: "btn btn-warning" %>
 			  <%= link_to "Enlever le statut d'admin", user_remove_admin_path(user), class: "btn btn-primary btn-xs" %>
 		  <% end %>
 		<% end %>
