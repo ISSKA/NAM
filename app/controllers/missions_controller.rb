@@ -24,6 +24,9 @@ class MissionsController < ApplicationController
 		puts "type de missions = #{@missions.class}"
 		puts "type de mission 1 = #{@missions[0].class}"
 		puts "test #{@missions[0]['description']}"
+	  elsif @sort == 'user'
+	    @missions = Mission.all.order('user desc')
+		@missions = Mission.find_by_sql("SELECT missions.* FROM missions LEFT JOIN users ON users.id = missions.user_id ORDER BY users.firstname DESC")
 	  else
 	    @missions = Mission.all.order('starting_date desc', 'ending_date desc')
 	  end

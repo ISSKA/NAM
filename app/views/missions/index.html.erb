@@ -16,7 +16,7 @@
         <th><%= link_to "Starting date", missions_path + "?sort=starting_date"%></th>
         <th><%= link_to "Ending date", missions_path + "?sort=ending_date"%></th>
         <th><%= link_to "Number of assets", missions_path + "?sort=assets"%></th>
-        <th>Owner</th>
+        <th><%= link_to "Owner", missions_path + "?sort=user"%></th>
         <th colspan="2">Actions</th>
       </tr>
     </thead>
