@@ -9,12 +9,19 @@ class AssetMissionController < ApplicationController
   def edit
     add_breadcrumb 'asset ' + @asset_mission.asset.product_serial
     add_breadcrumb 'edit'
+	@document = Document.new 
   end
 
   def update
     add_breadcrumb 'asset ' + @asset_mission.asset.product_serial
     add_breadcrumb 'edit'
-
+	puts "voila voila voiel"
+	puts "test param1 = #{params[:img]}"
+	puts "test param2 = #{@asset_mission.img}"
+	puts "test param1 id = #{params[:id]}"
+	if @asset_mission.img != nil
+	  puts "test param = #{@asset_mission.img}"
+	end
     if @asset_mission.update(asset_mission_params)
       flash[:success] = 'Asset mission successfully updated.'
       redirect_to mission_path(@asset_mission.mission_id)
@@ -29,6 +36,7 @@ class AssetMissionController < ApplicationController
   end
 
   def asset_mission_params
-    params.require(:asset_mission).permit(:comments, :placed_at, :extracted_at, :position_x, :position_y, :position_z)
+    params.require(:asset_mission).permit(:comments, :placed_at, :img, :extracted_at, :position_x, :position_y, :position_z)
   end
+
 end

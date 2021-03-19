@@ -60,10 +60,15 @@ group :development do
 end
 
 group :preproduction, :production do
-  gem 'mysql2'
+  gem 'mysql2', '~> 0.5.3'
 end
+
+gem 'attach', '~> 1.0.1'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+
+gem 'carrierwave'   
+gem 'bootstrap-sass'  

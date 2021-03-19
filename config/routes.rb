@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  resources :documents, only: [:index, :new, :create, :destroy]
+  get 'documents/index'
+
+  get 'documents/new'
+
+  get 'documents/create'
+
+  get 'documents/destroy'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'static#index'
@@ -30,7 +40,7 @@ Rails.application.routes.draw do
     delete 'extract_asset/:mission_asset_id'  => 'missions#extract_asset', as: :extract_asset
 
     ## Assets Missions
-    resources :asset_mission
+    resources :asset_mission 
   end
 
   ## Sessions
