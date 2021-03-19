@@ -28,15 +28,13 @@
 <div class="form-group">
   <%= label_tag 'img', "Image", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
-  <%= f.fields_for :document do |file| %>   
-      <%= file.label :name %>   
-      <%= file.text_field :name %>    
-      <%= file.label :attachment %>   
-      <%= file.file_field :attachment %>   
-      <%= file.submit "Save" %>   
-   <% end %>  
-   </div>
-</div>  
+	<%= link_to "New Document", new_document_path + "?type=image&purpose=asset_mission&mission_id=#{params[:mission_id]}&asset_id=#{params[:id]}" %>
+  </div>
+</div>
+
+<div class="form-group">   
+    
+</div>   
 
 <div class="form-group">
   <%= label_tag 'extracted_at', "Removed on", class: 'col-sm-2 col-md-2 control-label' %>

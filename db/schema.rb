@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210318165445) do
+ActiveRecord::Schema.define(version: 20210319085148) do
 
   create_table "asset_missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
     t.integer "measurement_interval"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 20210318165445) do
     t.string "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
+    t.string "purpose"
   end
 
   create_table "missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|

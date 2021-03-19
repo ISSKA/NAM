@@ -9,7 +9,6 @@ class AssetMissionController < ApplicationController
   def edit
     add_breadcrumb 'asset ' + @asset_mission.asset.product_serial
     add_breadcrumb 'edit'
-	@document = Document.new 
   end
 
   def update
