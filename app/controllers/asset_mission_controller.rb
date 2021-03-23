@@ -14,10 +14,6 @@ class AssetMissionController < ApplicationController
   def update
     add_breadcrumb 'asset ' + @asset_mission.asset.product_serial
     add_breadcrumb 'edit'
-	puts "voila voila voiel"
-	puts "test param1 = #{params[:img]}"
-	puts "test param2 = #{@asset_mission.img}"
-	puts "test param1 id = #{params[:id]}"
 	if @asset_mission.img != nil
 	  puts "test param = #{@asset_mission.img}"
 	end

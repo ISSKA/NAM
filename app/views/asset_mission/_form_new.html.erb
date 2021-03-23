@@ -28,7 +28,12 @@
 <div class="form-group">
   <%= label_tag 'img', "Image", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
-	<%= link_to "New Document", new_document_path + "?type=image&purpose=asset_mission&mission_id=#{params[:mission_id]}&asset_id=#{params[:id]}" %>
+    <%if @asset_mission.img == nil%>
+	  <%= link_to "New Document", new_document_path + "?type=image&purpose=asset_mission&id=#{@asset_mission.id}" %>
+	<%else%>
+	  <%= Document.find(@asset_mission.img).name%>
+	  <%= link_to "Remove image", document_path, :method => 'destroy' %>
+	<%end%>
   </div>
 </div>
 

@@ -20,17 +20,15 @@
 <% end %> 
   
 <div>   
-  <p>
-    Url retour = <%=@url_back%>
-  <p>
    <%= form_for @document, html: { multipart: true } do |f| %>   
+	  <%= f.hidden_field :purpose, :value => @document.purpose %>
       <%= f.label :name %>   
       <%= f.text_field :name %>   
       <br><br>   
       <%= f.label :attachment %>   
       <%= f.file_field :attachment %>   
       <br>    
-	  <%= f.button 'Save', type: 'submit', name: "url", value: @url_back %>
+	  <%= f.button 'Save', type: 'submit', name: "purpose_id", value: @purpose_id %>
    <% end %>   
 </div>   
 </div> 
