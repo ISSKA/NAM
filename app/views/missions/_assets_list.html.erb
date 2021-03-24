@@ -6,7 +6,7 @@
       <th>Description</th>
       <th>Purchase</th>
       <th>Expected lifetime</th>
-      <th>Position</th>
+      <th>Image</th>
       <th>Placed on</th>
       <th>Removed on</th>
       <th>Comment</th>
@@ -43,7 +43,13 @@
       -
       <% end %>
     </td>
-    <td><%= asset_mission.position_x %> <%= asset_mission.position_y %> <%= asset_mission.position_z %></td>
+    <td>
+	  <% if asset_mission.img != "NULL" %>
+	    <a href="<%= Document.find(asset_mission.img).attachment_url %>">
+	      <img src="<%= Document.find(asset_mission.img).attachment_url %>" style="max-width:100%; max-height:100px;"></img>
+		</a>
+	  <% end %>
+	</td>
     <td><%= asset_mission.placed_at.strftime("%d.%m.%Y") %></td>
     <td>
       <% if asset_mission.extracted_at %>

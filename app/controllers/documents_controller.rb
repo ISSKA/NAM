@@ -45,8 +45,18 @@ class DocumentsController < ApplicationController
       
    def destroy   
       @document = Document.find(params[:id])   
-      @document.destroy   
-      redirect_to documents_path, notice:  "Successfully deleted."   
+	  @purpose = params[:purpose]
+	  @purpose_id = params[:purpose_id]
+	  if @purpose == "asset_mission"
+	    @asset_mission = AssetMission.find(@purpose_id)
+		if not @asset_mission.update(:img => "NULL")
+		  flash[:danger] = "Problem with image suppression."
+		  puts "alors ici on a asset mission id = #{@asset_mission.id}"
+		else
+		  @document.destroy   
+		end
+	  end
+      redirect_back(fallback_location: root_path)  
    end   
       
    private   
