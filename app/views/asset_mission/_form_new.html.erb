@@ -29,17 +29,17 @@
   <%= label_tag 'img', "Image", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
     <%if @asset_mission.img == nil%>
-	  <%= link_to "Add Image", new_document_path + "?type=image&purpose=asset_mission&id=#{@asset_mission.id}" %>
+	  <%= link_to "Add Image", new_document_path + "?file_type=image&purpose=asset_mission&id=#{@asset_mission.id}" %>
 	<%elsif @asset_mission.img == "NULL"%>
-	  <%= link_to "Add Image", new_document_path + "?type=image&purpose=asset_mission&id=#{@asset_mission.id}" %>
+	  <%= link_to "Add Image", new_document_path + "?file_type=image&purpose=asset_mission&id=#{@asset_mission.id}" %>
 	<% else %>
 	  <div style="position:relative; top:0px; left:0px; width:100%; height:140px;">
 	    <div style="position:absolute; top:0px; left:0px; width:30%; height:20px; text-align:center;">
 	      <%= Document.find(@asset_mission.img).name%>
 	    </div>
 		<div style="position:absolute; top:20px; left:0px; width:30%; height:100px; text-align:center;">
-		  <a href="<%= Document.find(@asset_mission.img).attachment_url %>">
-		    <img src="<%= Document.find(@asset_mission.img).attachment_url %>" style="max-width:100%; max-height:100px;"></img>
+		  <a href="<%= Document.find(@asset_mission.img).attachment %>">
+		    <img src="<%= Document.find(@asset_mission.img).attachment %>" style="max-width:100%; max-height:100px;"></img>
 		  </a>
 		</div>
 	    <div style="position:absolute; top:120px; left:0px; width:30%; height:20px; text-align:center;">

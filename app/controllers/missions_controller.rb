@@ -7,30 +7,30 @@ class MissionsController < ApplicationController
   add_breadcrumb 'missions', :missions_path
 
   def index
-    @sort = params[:sort]
-	if @sort == nil
-      @missions = Mission.all.order('starting_date desc', 'ending_date desc')
-	else
-	  if @sort == 'name'
-	    @missions = Mission.all.order('project_name desc')
-	  elsif @sort == 'description'
-	    @missions = Mission.all.order('description desc')
-	  elsif @sort == 'starting_date'
-	    @missions = Mission.all.order('starting_date desc')
-	  elsif @sort == 'ending_date'
-	    @missions = Mission.all.order('ending_date desc')
-	  elsif @sort == 'assets'
-		@missions = Mission.find_by_sql("SELECT missions.* FROM missions LEFT JOIN asset_missions ON asset_missions.mission_id = missions.id GROUP BY missions.id ORDER BY COUNT(asset_missions.id) DESC")
-		puts "type de missions = #{@missions.class}"
-		puts "type de mission 1 = #{@missions[0].class}"
-		puts "test #{@missions[0]['description']}"
-	  elsif @sort == 'user'
-	    @missions = Mission.all.order('user desc')
-		@missions = Mission.find_by_sql("SELECT missions.* FROM missions LEFT JOIN users ON users.id = missions.user_id ORDER BY users.firstname DESC")
-	  else
-	    @missions = Mission.all.order('starting_date desc', 'ending_date desc')
-	  end
-	end
+		@sort = params[:sort]
+		if @sort == nil
+			@missions = Mission.all.order('starting_date desc', 'ending_date desc')
+		else
+			if @sort == 'name'
+				@missions = Mission.all.order('project_name desc')
+			elsif @sort == 'description'
+				@missions = Mission.all.order('description desc')
+			elsif @sort == 'starting_date'
+				@missions = Mission.all.order('starting_date desc')
+			elsif @sort == 'ending_date'
+				@missions = Mission.all.order('ending_date desc')
+			elsif @sort == 'assets'
+				@missions = Mission.find_by_sql("SELECT missions.* FROM missions LEFT JOIN asset_missions ON asset_missions.mission_id = missions.id GROUP BY missions.id ORDER BY COUNT(asset_missions.id) DESC")
+				puts "type de missions = #{@missions.class}"
+				puts "type de mission 1 = #{@missions[0].class}"
+				puts "test #{@missions[0]['description']}"
+			elsif @sort == 'user'
+				@missions = Mission.all.order('user desc')
+				@missions = Mission.find_by_sql("SELECT missions.* FROM missions LEFT JOIN users ON users.id = missions.user_id ORDER BY users.firstname DESC")
+			else
+				@missions = Mission.all.order('starting_date desc', 'ending_date desc')
+			end
+		end
   end
 
   def new

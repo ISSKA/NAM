@@ -1,49 +1,34 @@
-<div class="container">   
-<% if !flash[:notice].blank? %>   
-   <div>   
-      <%= flash[:notice] %>   
-   </div>   
-<% end %>   
-  
-<br>   
-  
-<%= link_to "New Document", new_document_path %>   
-<br>   
-<br>   
-  
-<table border="3">   
-   <thead>   
-      <tr>   
-         <th>Candidate Name</th>   
-         <th>Download Link</th>   
-         <th>Action</th>   
-      </tr>   
-   </thead>   
-      
-   <tbody>   
-      <% @documents.each do |document| %>   
-            
-         <tr>   
-            <td><%= document.name %></td>   
-            <td><%= link_to "Download", document.attachment_url %></td>   
-            <td><%= link_to "Delete",  document, method: :delete, confirm: "Are you sure you want to delete #{document.name}?" %></td>   
-         </tr>   
-            
-      <% end %>   
-   </tbody>   
-      
-</table> 
+<div class="card-pf">
+  <header class="login-pf-header">
+    <h1>
+      Documents
+    </h1>
+  </header>
 
-<ul>
-<% @documents.each do |document| %>    
- <li>   
-   <%= document.name %> 
-   <%= document.attachment_url %>  
-   <a href="<%= document.attachment_url %>">
-     <img src="<%= document.attachment_url %>" style="max-width:100%; max-height:200px;"></img>
-   </a>
- </li>  
-<% end %>   
-	
-</ul>
-</div>  
+  <table class="table table-striped table-bordered table-hover" id="documents_table">
+    <thead>
+      <tr>
+        <th><%= link_to "Name", documents_path + "?sort=name"%></th>
+        <th>Attachment</th>
+        <th><%= link_to "File type", documents_path + "?sort=file_type"%></th>
+        <th><%= link_to "Purpose", documents_path + "?sort=purpose"%></th>
+      </tr>
+    </thead>
+    <% @documents.each do |document| %>
+    <tr>
+      <td><%= document.name %></td>
+      <td>
+	    <a href="<%= document.attachment %>">
+		  <img src="<%= document.attachment %>" style="max-width:30%; max-height:100px;"></img>
+		</a>
+	  </td>
+      <td><%= document.file_type %></td>
+      <td>
+			<%if document.purpose == "asset_mission" %>
+				<%= link_to "Asset mission", missions_path + "/#{AssetMission.find(document.parent_id).mission_id}"%>
+			<%end%>
+			</td>
+    </tr>
+    <% end %>
+  </table>
+</div>

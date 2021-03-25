@@ -22,13 +22,15 @@
 <div>   
    <%= form_for @document, html: { multipart: true } do |f| %>   
 	  <%= f.hidden_field :purpose, :value => @document.purpose %>
+		<%= f.hidden_field :file_type, :value => @document.file_type %>
+		<%= f.hidden_field :parent_id, :value => @document.parent_id %>
       <%= f.label :name %>   
       <%= f.text_field :name %>   
       <br><br>   
       <%= f.label :attachment %>   
       <%= f.file_field :attachment %>   
       <br>    
-	  <%= f.button 'Save', type: 'submit', name: "purpose_id", value: @purpose_id %>
+	  <%= f.button 'Save', type: 'submit' %>
    <% end %>   
 </div>   
 </div> 
