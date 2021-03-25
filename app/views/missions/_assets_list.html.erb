@@ -44,7 +44,7 @@
       <% end %>
     </td>
     <td>
-	  <% if asset_mission.img != "NULL" %>
+	  <% if asset_mission.img != nil and asset_mission.img != "NULL"%>
 	    <a href="<%= Document.find(asset_mission.img).attachment %>">
 	      <img src="<%= Document.find(asset_mission.img).attachment %>" style="max-width:100%; max-height:100px;"></img>
 		</a>
