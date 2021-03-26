@@ -59,13 +59,13 @@ class MissionsController < ApplicationController
   def edit
     add_breadcrumb @mission.project_name, mission_path(@mission)
     add_breadcrumb 'edit'
-
-    @asset_missions = @mission.asset_missions.order('placed_at desc')
+		@asset_missions = @mission.asset_missions.order('placed_at desc')
   end
 
   def update
     add_breadcrumb @mission.project_name, mission_path(@mission)
     add_breadcrumb 'edit'
+		puts "parametres de mission = #{mission_params}"
 
     if @mission.update(mission_params)
       flash[:success] = 'Mission successfully updated.'
@@ -149,6 +149,6 @@ class MissionsController < ApplicationController
   end
 
   def mission_params
-    params.require(:mission).permit(:project_name, :description, :starting_date, :ending_date)
+    params.require(:mission).permit(:project_name, :description, :starting_date, :ending_date, :user_id)
   end
 end

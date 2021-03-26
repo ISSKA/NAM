@@ -17,6 +17,7 @@
   </div>
 </div>
 <% end %>
+<%= f.hidden_field :user_id, :value =>  current_logged_user.id%>
 <div class="form-group">
   <%= label_tag 'user', "Owner*", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
