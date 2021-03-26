@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   end
 
   def create
+		puts "user = #{@user}"
     @user = User.new(user_params)
     @user.gen_token_and_salt
     if @user.save
@@ -106,6 +107,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:firstname, :lastname, :mail, :avatar, :password, :password_confirmation)
+    params.require(:user).permit(:firstname, :lastname, :mail, :avatar, :password, :password_confirmation, :admin)
   end
 end
