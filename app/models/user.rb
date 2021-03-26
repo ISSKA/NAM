@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # Validations
-  validates :firstname, :lastname, :password, :password_confirmation, :salt, presence: true
+  validates :firstname, :lastname, :mail, :password, :password_confirmation, :salt, presence: true
   validates :password, confirmation: true
   validates :password, length: { minimum: 7 }
   validates :mail, uniqueness: true
