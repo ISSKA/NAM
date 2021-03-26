@@ -9,3 +9,13 @@ fr:
     asset_types: "Catégories"
     assets: "Capteurs"
     missions: "Missions"
+    
+
+  activerecord:
+    errors:
+      models:
+        mission:
+          attributes:
+            user:
+              blank: 'Conflict'
+              required: 'required'

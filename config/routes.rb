@@ -34,7 +34,6 @@ Rails.application.routes.draw do
   ## Missions
   resources :missions do
     get 'prepare_assets'                      => 'missions#prepare_assets'
-	get ':sort'                               => 'missions#index'
     post 'add_assets'                         => 'missions#add_assets'
     post 'remove_asset/:mission_asset_id'     => 'missions#remove_asset', as: :remove_asset
     delete 'extract_asset/:mission_asset_id'  => 'missions#extract_asset', as: :extract_asset
