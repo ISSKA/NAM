@@ -1,6 +1,6 @@
 class AssetMission < ApplicationRecord
   # Validations
-  validates :user, :mission, :asset, :placed_at, :img, presence: true
+  validates :user, :mission, :asset, :placed_at, presence: true
   validate :one_asset_per_mission_at_a_time
   validate :created_extracted_date_validation
   validate :all_position_required

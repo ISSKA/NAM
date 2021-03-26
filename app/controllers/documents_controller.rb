@@ -50,9 +50,7 @@ class DocumentsController < ApplicationController
 		end   
 		if @document.purpose == "asset_mission"
 			@asset_mission = AssetMission.find(@purpose_id)
-			if not @asset_mission.update(:img => @id)
-				flash[:danger] = "Problem with document."
-			end
+			ActiveRecord::Base.connection.exec_query("update asset_missions set img = #{@id} where id = #{@purpose_id}")
 			@url = missions_path + "/#{@asset_mission.mission_id}/asset_mission/#{@asset_mission.id}/edit"
 		end
 		redirect_to @url + "?docId=#{@id}"
@@ -64,11 +62,9 @@ class DocumentsController < ApplicationController
 		@purpose_id = params[:purpose_id]
 		if @purpose == "asset_mission"
 			@asset_mission = AssetMission.find(@purpose_id)
-			if not @asset_mission.update(:img => "NULL")
-				flash[:danger] = "Problem with image suppression."
-			else
-				@document.destroy   
-			end
+			puts "attention on a asset mission = #{@asset_mission}"
+			ActiveRecord::Base.connection.exec_query("update asset_missions set img = NULL where id = #{@purpose_id}")
+			@document.destroy   
 		end
 		redirect_back(fallback_location: root_path)  
 	end   
