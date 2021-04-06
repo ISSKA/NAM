@@ -20,6 +20,9 @@ class Asset < ApplicationRecord
     if battery_state < 0
       battery_state = 0
     end
+		if battery_out
+			battery_state = 0
+		end
     return battery_state.to_i
   end
 

@@ -1,6 +1,5 @@
 class AssetMissionController < ApplicationController
   before_action :get_asset_mission, only: %i[edit update]
-	before_action :must_be_proprietary, only: %i[edit update]
 
   before_action do
     add_breadcrumb 'missions', :missions_path
@@ -10,6 +9,7 @@ class AssetMissionController < ApplicationController
   def edit
     add_breadcrumb 'asset ' + @asset_mission.asset.product_serial
     add_breadcrumb 'edit'
+		@is_proprietary = @asset_mission.user == current_logged_user || current_logged_user.admin
   end
 
   def update
@@ -32,7 +32,7 @@ class AssetMissionController < ApplicationController
   end
 	
 	def must_be_proprietary
-    render_403 if (current_logged_user && !(@asset_mission.user == current_logged_user or current_logged_user.admin))
+    render_403 if (current_logged_user && !(@asset_mission.user == current_logged_user || current_logged_user.admin))
   end
 
   def asset_mission_params

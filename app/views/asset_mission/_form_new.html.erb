@@ -18,6 +18,7 @@
 </div>
 <% end %>
 
+<%if @is_proprietary%>
 <div class="form-group">
   <%= label_tag 'placed_at', "Placed on*", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
@@ -49,11 +50,13 @@
 		<%end%>
   </div>
 </div>
+<%end%>
 
 <div class="form-group">   
     
 </div>   
 
+<%if @is_proprietary%>
 <div class="form-group">
   <%= label_tag 'extracted_at', "Removed on", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
@@ -79,6 +82,7 @@
     <%= f.number_field :position_z, class: 'form-control'%>
   </div>
 </div>
+<%end%>
 
 <div class="form-group">
   <%= label_tag 'comments', "Comment", class: 'col-sm-2 col-md-2 control-label' %>

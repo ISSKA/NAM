@@ -86,14 +86,29 @@ class AssetsController < ApplicationController
       @battery_replacement = BatteryReplacement.new(asset: @asset, user: current_logged_user)
       if @battery_replacement.save
         flash[:success] = 'Battery changed successfully.'
+				if not @asset.update(:battery_out => false)
+					flash[:danger] = 'Battery changed successfull but battery_out is always active.'
+				end
       else
         flash[:danger] = 'Failed to change the battery'
       end
     else
       flash[:warning] = "This asset has no battery, you can't replace it ;)"
     end
-    redirect_to asset_path(@asset)
+		redirect_back(fallback_location: 'root')
   end
+	
+	def battery_out
+		@asset = Asset.find(params['asset_id'])
+		puts 'coucou'
+		puts @asset
+		if @asset.update(:battery_out => true)
+      flash[:success] = 'Asset successfully updated.'
+    else
+      flash[:danger] = 'Failed to update asset'
+    end
+		redirect_back(fallback_location: 'root')
+	end
 
   def get_asset
     @asset = Asset.find_by(id: params['id'], deleted: false) || Asset.find_by(id: params['asset_id'], deleted: false)
@@ -111,6 +126,6 @@ class AssetsController < ApplicationController
   end
 
   def asset_params
-    params.require(:asset).permit(:product_serial, :description, :battery_life, :date_purchase, :asset_type_id, :user_id)
+    params.require(:asset).permit(:product_serial, :description, :battery_life, :date_purchase, :asset_type_id, :user_id, :asset_id)
   end
 end

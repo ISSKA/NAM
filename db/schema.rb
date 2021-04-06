@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210325094031) do
+ActiveRecord::Schema.define(version: 20210406154646) do
 
   create_table "asset_missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
     t.integer "measurement_interval"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20210325094031) do
     t.datetime "updated_at", null: false
     t.bigint "asset_type_id"
     t.boolean "deleted", default: false
+    t.boolean "battery_out", default: false
     t.index ["asset_type_id"], name: "index_assets_on_asset_type_id"
     t.index ["user_id"], name: "index_assets_on_user_id"
   end

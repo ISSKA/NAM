@@ -68,6 +68,7 @@
       <% if is_logged_in %>
         <%= link_to 'upload data', asset_path(asset), class: "disabled btn btn-primary btn-xs" %>
         <%= link_to 'battery replaced', asset_replace_battery_path(asset),method: :post, class: "btn btn-primary btn-xs" %>
+				<%= link_to 'battery out', asset_battery_out_path(asset),method: :post, class: "btn btn-primary btn-xs" %>
         <%= link_to 'edit', edit_mission_asset_mission_path(asset_mission.mission, asset_mission), class: "btn btn-primary btn-xs" %>
         <%= link_to 'removed', mission_extract_asset_path(asset_mission.mission, asset_mission), method: :delete, class: disabled + "btn btn-danger btn-xs" %>
         <%= link_to 'delete', mission_remove_asset_path(asset_mission.mission, asset_mission), method: :post, data: { :confirm => "Are you sure?" }, class: "btn btn-danger btn-xs" %>
