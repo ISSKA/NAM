@@ -11,13 +11,13 @@
   <table class="table table-striped table-bordered table-hover" id="assets_table">
     <thead>
       <tr>
-        <th>Asset type</th>
-        <th>Asset serial</th>
-        <th>Description</th>
-        <th>Available now</th>
-        <th>Date of purchase</th>
-        <th>Expected lifetime</th>
-        <th>Owner</th>
+				<th><%= link_to "Asset type", assets_path + "?sort=type"%></th>
+				<th><%= link_to "Asset serial", assets_path + "?sort=serial"%></th>
+				<th><%= link_to "Description", assets_path + "?sort=description"%></th>
+				<th><%= link_to "Available now", assets_path + "?sort=available"%></th>
+				<th><%= link_to "Date of purchase", assets_path + "?sort=date"%></th>
+				<th><%= link_to "Expected lifetime", assets_path + "?sort=lifetime"%></th>
+				<th><%= link_to "Owner", assets_path + "?sort=owner"%></th>
         <th colspan="2">Actions</th>
       </tr>
     </thead>

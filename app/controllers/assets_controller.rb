@@ -8,6 +8,29 @@ class AssetsController < ApplicationController
 
   def index
     @assets = Asset.where(deleted: false)
+		@sort = params[:sort]
+		if @sort == nil
+			@assets = Asset.where(deleted: false).order('date_purchase desc')
+		else
+			if @sort == 'type'
+				@assets = Asset.where(deleted: false).order('asset_type_id desc')
+			elsif @sort == 'serial'
+				@assets = Asset.where(deleted: false).order('product_serial desc')
+			elsif @sort == 'description'
+				@assets = Asset.where(deleted: false).order('description desc')
+			elsif @sort == 'date'
+				@assets = Asset.where(deleted: false).order('date_purchase desc')
+			elsif @sort == 'available'
+				@assets = Asset.find_by_sql("SELECT assets.* FROM assets LEFT JOIN asset_missions ON asset_missions.asset_id = assets.id WHERE assets.deleted = 0 GROUP BY assets.id ORDER BY COUNT(asset_missions.id) ASC")
+			elsif @sort == 'lifetime'
+				@assets = Asset.where(deleted: false)
+				@assets = @assets.sort_by { |asset| asset.battery_life == nil ? 999999 : asset.get_battery_status_pct * asset.battery_life}
+			elsif @sort == 'owner'
+				@assets = Asset.find_by_sql("SELECT assets.* FROM assets LEFT JOIN users ON users.id = assets.user_id WHERE assets.deleted = 0 ORDER BY users.firstname DESC")
+			else
+				@assets = Asset.where(deleted: false).order('date_purchase desc')
+			end
+		end
   end
 
   def new
