@@ -1,6 +1,6 @@
 class AssetsController < ApplicationController
   before_action :must_be_logged, only: %i[new create edit update destroy archive replace_battery]
-  before_action :must_be_proprietary, only: %i[update destroy replace_battery]
+  before_action :must_be_proprietary, only: %i[update destroy]
   before_action :get_asset_type, only: [:create]
   before_action :get_asset, only: %i[show edit update archive replace_battery]
 
