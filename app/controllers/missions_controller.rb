@@ -13,6 +13,9 @@ class MissionsController < ApplicationController
 		else
 			if @sort == 'name'
 				@missions = Mission.all.order('project_name desc')
+			elsif @sort == 'location'
+				@missions = Mission.all.order('location desc')
+				ActiveRecord::Base.connection.exec_query("update missions set location = 'Milandre' where project_name like '%MIL%'")
 			elsif @sort == 'description'
 				@missions = Mission.all.order('description desc')
 			elsif @sort == 'starting_date'
@@ -149,6 +152,6 @@ class MissionsController < ApplicationController
   end
 
   def mission_params
-    params.require(:mission).permit(:project_name, :description, :starting_date, :ending_date, :user_id)
+    params.require(:mission).permit(:project_name, :location, :description, :starting_date, :ending_date, :user_id)
   end
 end

@@ -12,6 +12,7 @@
     <thead>
       <tr>
         <th><%= link_to "Project name", missions_path + "?sort=name"%></th>
+				<th><%= link_to "Location", missions_path + "?sort=location"%></th>
         <th><%= link_to "Description", missions_path + "?sort=description"%></th>
         <th><%= link_to "Starting date", missions_path + "?sort=starting_date"%></th>
         <th><%= link_to "Ending date", missions_path + "?sort=ending_date"%></th>
@@ -23,6 +24,7 @@
     <% @missions.each do |mission| %>
     <tr>
       <td><%= mission.project_name %></td>
+			<td><%= mission.location %></td>
       <td><%= mission.description %></td>
       <td><%= mission.starting_date.strftime("%d.%m.%Y") %></td>
       <td><%= mission.ending_date ? mission.ending_date.strftime("%d.%m.%Y") : '-' %></td>

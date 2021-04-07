@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210406154646) do
+ActiveRecord::Schema.define(version: 20210407065510) do
 
   create_table "asset_missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" do |t|
     t.integer "measurement_interval"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20210406154646) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "location"
     t.index ["user_id"], name: "index_missions_on_user_id"
   end
 

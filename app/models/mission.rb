@@ -1,6 +1,6 @@
 class Mission < ApplicationRecord
   # Validations
-  validates :project_name, :description, :starting_date, :user, presence: true
+  validates :project_name, :location, :description, :starting_date, :user, presence: true
   validate :starting_ending_date_validation
 
   belongs_to :user
