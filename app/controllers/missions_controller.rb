@@ -15,7 +15,6 @@ class MissionsController < ApplicationController
 				@missions = Mission.all.order('project_name desc')
 			elsif @sort == 'location'
 				@missions = Mission.all.order('location desc')
-				ActiveRecord::Base.connection.exec_query("update missions set location = 'Milandre' where project_name like '%MIL%'")
 			elsif @sort == 'description'
 				@missions = Mission.all.order('description desc')
 			elsif @sort == 'starting_date'
