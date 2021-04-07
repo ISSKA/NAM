@@ -51,7 +51,7 @@
           </div>
         </div>
         <% end %>
-        <% if asset.battery_life %>
+        <% if asset.battery_life && !asset.battery_out%>
         <%= asset.battery_life %> h (<%= asset.battery_life / 24 %> days)
         <% else %>
         -
