@@ -7,6 +7,20 @@ class UsersController < ApplicationController
   def index
     @titre = "Tous les utilisateurs"
     @users = User.all
+		@sort = params[:sort]
+		if @sort == nil
+			@users = User.all.order('created_at desc')
+		else
+			if @sort == 'prenom'
+				@users = User.all.order('firstname desc')
+			elsif @sort == 'nom'
+				@users = User.all.order('lastname desc')
+			elsif @sort == 'admin'
+				@users = User.all.order('admin desc')
+			else
+				@users = User.all.order('created_at desc')
+			end
+		end
   end
   
   def new

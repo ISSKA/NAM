@@ -8,9 +8,9 @@
   <table class="table table-striped table-bordered table-hover" id="users_table">
     <thead>
       <tr>
-        <th>Prenom</th>
-        <th>Nom</th>
-		<th>Admin</th>
+				<th><%= link_to "Prenom", users_path + "?sort=prenom"%></th>
+				<th><%= link_to "Nom", users_path + "?sort=nom"%></th>
+				<th><%= link_to "Admin", users_path + "?sort=admin"%></th>
         <th colspan="2">Actions</th>
       </tr>
     </thead>
