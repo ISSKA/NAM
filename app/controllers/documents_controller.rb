@@ -25,7 +25,6 @@ class DocumentsController < ApplicationController
 		@purpose_id = params[:id]
 		if @purpose != nil
 			@document[:purpose] = @purpose
-			@document[:file_type] = @file_type
 			@document[:parent_id] = @purpose_id
 			if @purpose == 'asset_mission'
 				#@url_back = missions_path + "/#{params[:mission_id]}/asset_mission/#{params[:asset_id]}/edit"
@@ -53,6 +52,11 @@ class DocumentsController < ApplicationController
 			ActiveRecord::Base.connection.exec_query("update asset_missions set img = #{@id} where id = #{@purpose_id}")
 			@url = missions_path + "/#{@asset_mission.mission_id}/asset_mission/#{@asset_mission.id}/edit"
 		end
+		if @document.purpose == "mission"
+			@mission = Mission.find(@purpose_id)
+			ActiveRecord::Base.connection.exec_query("update missions set documents = #{@id} where id = #{@purpose_id}")
+			@url = missions_path + "/#{@mission.id}/edit"
+		end
 		redirect_to @url + "?docId=#{@id}"
 	end   
       
@@ -64,6 +68,12 @@ class DocumentsController < ApplicationController
 			@asset_mission = AssetMission.find(@purpose_id)
 			puts "attention on a asset mission = #{@asset_mission}"
 			ActiveRecord::Base.connection.exec_query("update asset_missions set img = NULL where id = #{@purpose_id}")
+			@document.destroy   
+		end
+		if @purpose == "mission"
+			@mission = Mission.find(@purpose_id)
+			puts "attention on a mission = #{@mission}"
+			ActiveRecord::Base.connection.exec_query("update missions set documents = NULL where id = #{@purpose_id}")
 			@document.destroy   
 		end
 		redirect_back(fallback_location: root_path)  

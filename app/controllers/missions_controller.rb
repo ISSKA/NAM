@@ -62,6 +62,7 @@ class MissionsController < ApplicationController
     add_breadcrumb @mission.project_name, mission_path(@mission)
     add_breadcrumb 'edit'
 		@asset_missions = @mission.asset_missions.order('placed_at desc')
+		require 'csv'
   end
 
   def update
