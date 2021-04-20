@@ -47,6 +47,10 @@
 {
 	visibility: hidden;
 }
+#csv_logo:hover
+{
+	cursor: pointer;
+}
 #csv:fullscreen
 {
 	visibility:visible;
@@ -64,17 +68,16 @@
 		<%elsif @mission.documents == "NULL" or @mission.documents == "nil"%>
 			<%= link_to "Add Documents", new_document_path + "?file_type=csv&purpose=mission&id=#{@mission.id}" %>
 		<% else %>
-			<div style="position:relative; top:0px; left:0px; width:100%; height:140px;">
+			<div style="position:relative; top:0px; left:0px; width:100%; height:70px;">
 				<div style="position:absolute; top:0px; left:0px; width:30%; height:20px; text-align:center;">
 					<%= Document.find(@mission.documents).name%>
 				</div>
-				<div style="position:absolute; top:20px; left:0px; width:30%; height:100px; text-align:center;">
+				<div style="position:absolute; top:20px; left:0px; width:30%; height:30px; text-align:center;">
 					<a href="<%= Document.find(@mission.documents).attachment %>">
 						<% @rowarraydisp = CSV.read("public" + Document.find(@mission.documents).attachment_url, :headers => false, :col_sep => ";") %>
 					</a>
 					<div id="fullScreenElement1" class="button" onclick="display_csv('csv');">
-						<p>🍔</p>
-						Click to go fullscreen
+						<p><img id="csv_logo" src="/csv_logo.png" width="20px" height="20px"></img></p>
 					</div>
 					<div id="csv">
 						<table style="display:block; overflow:auto; align-self: center;">
@@ -95,8 +98,8 @@
 						document.getElementById(div).requestFullscreen();
 					}
 				</script>
-				<div style="position:absolute; top:120px; left:0px; width:30%; height:20px; text-align:center;">
-					<%= link_to "Remove Documents", documents_destroy_path + "?id=#{@mission.documents}&purpose=mission&purpose_id=#{@mission.id}" %>
+				<div style="position:absolute; top:50px; left:0px; width:30%; height:20px; text-align:center;">
+					<%= link_to "Remove document", documents_destroy_path + "?id=#{@mission.documents}&purpose=mission&purpose_id=#{@mission.id}" %>
 				</div>
 			</div>
 		<%end%>
