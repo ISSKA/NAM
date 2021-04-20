@@ -42,6 +42,20 @@
     <%= f.text_area :description, class: 'form-control'%>
   </div>
 </div>
+<style>
+#csv
+{
+	visibility: hidden;
+}
+#csv:fullscreen
+{
+	visibility:visible;
+	display: flex;
+  justify-content: center;
+	height:600px;
+	width:100%;
+}
+</style>
 <div class="form-group">
   <%= label_tag 'documents', "Documents", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
@@ -54,22 +68,33 @@
 				<div style="position:absolute; top:0px; left:0px; width:30%; height:20px; text-align:center;">
 					<%= Document.find(@mission.documents).name%>
 				</div>
-			<div style="position:absolute; top:20px; left:0px; width:30%; height:100px; text-align:center;">
-				<a href="<%= Document.find(@mission.documents).attachment %>">
-					<% @rowarraydisp = CSV.read("public" + Document.find(@mission.documents).attachment_url, :headers => false, :col_sep => ";") %>
-				</a>
-				<table style="position:absolute; top:10px; height:90px; display:block; overflow:auto;">
-					<% @rowarraydisp.each do |row| %>
-						<tr>
-							<% row.each do |val|%>
-							<td>
-								<%= val %>
-							</td>
+				<div style="position:absolute; top:20px; left:0px; width:30%; height:100px; text-align:center;">
+					<a href="<%= Document.find(@mission.documents).attachment %>">
+						<% @rowarraydisp = CSV.read("public" + Document.find(@mission.documents).attachment_url, :headers => false, :col_sep => ";") %>
+					</a>
+					<div id="fullScreenElement1" class="button" onclick="display_csv('csv');">
+						<p>🍔</p>
+						Click to go fullscreen
+					</div>
+					<div id="csv">
+						<table style="display:block; overflow:auto; align-self: center;">
+							<% @rowarraydisp.each do |row| %>
+								<tr>
+									<% row.each do |val|%>
+									<td>
+										<%= val %>
+									</td>
+									<% end %>
+								</tr>
 							<% end %>
-						</tr>
-					<% end %>
-				</table>
-			</div>
+						</table>
+					</div>
+				</div>
+				<script type="text/javascript">
+					function display_csv(div) {
+						document.getElementById(div).requestFullscreen();
+					}
+				</script>
 				<div style="position:absolute; top:120px; left:0px; width:30%; height:20px; text-align:center;">
 					<%= link_to "Remove Documents", documents_destroy_path + "?id=#{@mission.documents}&purpose=mission&purpose_id=#{@mission.id}" %>
 				</div>
