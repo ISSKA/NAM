@@ -54,7 +54,11 @@ class DocumentsController < ApplicationController
 		end
 		if @document.purpose == "mission"
 			@mission = Mission.find(@purpose_id)
-			ActiveRecord::Base.connection.exec_query("update missions set documents = #{@id} where id = #{@purpose_id}")
+			@doc = ActiveRecord::Base.connection.exec_query("select documents from missions where id = #{@purpose_id}").rows[0][0]
+			puts "alors la on a #{@doc}"
+			(@doc == nil)? (@doc = "#{@id}"): (@doc = "#{@doc};#{@id}")
+			puts "alors la on a #{@doc}"
+			ActiveRecord::Base.connection.exec_query("update missions set documents = '#{@doc}' where id = #{@purpose_id}")
 			@url = missions_path + "/#{@mission.id}/edit"
 		end
 		redirect_to @url + "?docId=#{@id}"
