@@ -43,7 +43,7 @@
   </div>
 </div>
 <style>
-#csv
+.csv
 {
 	visibility: hidden;
 }
@@ -51,7 +51,7 @@
 {
 	cursor: pointer;
 }
-#csv:fullscreen
+.csv:fullscreen
 {
 	visibility:visible;
 	display: flex;
@@ -88,10 +88,10 @@
 					<a href="<%= Document.find(@mission.documents).attachment %>">
 						<% @rowarraydisp = CSV.read("public" + Document.find(doc).attachment_url, :headers => false, :col_sep => ";") %>
 					</a>
-					<div id="fullScreenElement1" class="button" onclick="display_csv('csv');">
+					<div id="fullScreenElement1" class="button" onclick="display_csv('csv<%=@iterator%>');">
 						<p><img id="csv_logo" src="/csv_logo.png" width="20px" height="20px"></img></p>
 					</div>
-					<div id="csv">
+					<div id="csv<%=@iterator%>" class = "csv">
 						<table style="display:block; overflow:auto; align-self: center;">
 							<% @rowarraydisp.each do |row| %>
 								<tr>

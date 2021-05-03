@@ -71,3 +71,4 @@ gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'carrierwave', '=1.0'   
 gem 'bootstrap-sass'  
 gem 'csv'
+gem "rexml", ">= 3.2.5"
