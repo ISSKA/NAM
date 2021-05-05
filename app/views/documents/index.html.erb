@@ -1,3 +1,23 @@
+<style>
+	.csv
+	{
+		visibility: hidden;
+		width:0%;
+		height:0px;
+	}
+	#csv_logo:hover
+	{
+		cursor: pointer;
+	}
+	.csv:fullscreen
+	{
+		visibility:visible;
+		display: flex;
+		justify-content: center;
+		height:600px;
+		width:100%;
+	}
+</style>
 <div class="card-pf">
   <header class="login-pf-header">
     <h1>
@@ -14,21 +34,53 @@
         <th><%= link_to "Purpose", documents_path + "?sort=purpose"%></th>
       </tr>
     </thead>
+		<%@iterator = 0%>
     <% @documents.each do |document| %>
     <tr>
       <td><%= document.name %></td>
       <td>
+			<%if document.purpose == "asset_mission" %>
 	    <a href="<%= document.attachment %>">
-		  <img src="<%= document.attachment %>" style="max-width:30%; max-height:100px;"></img>
-		</a>
-	  </td>
+				<img src="<%= document.attachment %>" style="max-width:30%; max-height:100px;"></img>
+			</a>
+			<%elsif document.purpose == "mission" %>
+			<% @rowarraydisp = CSV.read("public" + document.attachment_url, :headers => false, :col_sep => ";") %>
+			<div id="fullScreenElement1" class="button" onclick="display_csv('csv<%=@iterator%>');">
+				<p>
+					<img id="csv_logo" src="/csv_logo.png" width="20px" height="20px">
+					</img>
+				</p>
+			</div>
+			<div id="csv<%=@iterator%>" class = "csv">
+				<table style="display:block; overflow:auto; align-self: center;">
+					<% @rowarraydisp.each do |row| %>
+					<tr>
+						<% row.each do |val|%>
+						<td>
+							<%= val %>
+						</td>
+						<% end %>
+					</tr>
+					<% end %>
+				</table>
+			</div>
+			<script type="text/javascript">
+				function display_csv(div) {
+					document.getElementById(div).requestFullscreen();
+				}
+			</script>
+			<%end%>
+			</td>
       <td><%= document.file_type %></td>
       <td>
 			<%if document.purpose == "asset_mission" %>
 				<%= link_to "Asset mission", missions_path + "/#{AssetMission.find(document.parent_id).mission_id}"%>
+			<%elsif document.purpose == "mission" %>
+				<%= link_to "Mission", missions_path + "/#{document.parent_id}"%>
 			<%end%>
 			</td>
     </tr>
+		<%@iterator = @iterator + 1%>
     <% end %>
   </table>
 </div>

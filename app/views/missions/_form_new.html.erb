@@ -46,7 +46,7 @@
 <div class="form-group">
   <%= label_tag 'documents', "Documents", class: 'col-sm-2 col-md-2 control-label' %>
   <div class="col-sm-10 col-md-10">
-		<%if @mission.documents == nil%>
+		<%if @mission.documents == nil %>
 			<%= link_to "Add Document", new_document_path + "?file_type=csv&purpose=mission&id=#{@mission.id}" %>
 		<%elsif @mission.documents == "NULL" or @mission.documents == "nil"%>
 			<%= link_to "Add Documents", new_document_path + "?file_type=csv&purpose=mission&id=#{@mission.id}" %>

@@ -49,7 +49,9 @@
 		<%= label_tag 'documents', "Documents", class: 'col-sm-4 col-md-4' %>
 		<div class="col-sm-8 col-md-8">
 			<%if @mission.documents != nil%>
-				<%= render 'display_doc', edit_mode: false  %>
+				<%if @mission.documents != "NULL" and @mission.documents != "nil"%>
+					<%= render 'display_doc', edit_mode: false  %>
+				<%end%>
 			<%end%>
 		</div>
 	</div>
