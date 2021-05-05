@@ -63,6 +63,10 @@
 		<div style="position:absolute; top:<%=@stepHeight * @row + 50%>px; left:<%=@width * @col%>%; width:<%=@width%>%; height:20px; text-align:center;">
 			<%= link_to "Remove document", documents_destroy_path + "?id=#{doc}&purpose=mission&purpose_id=#{@mission.id}" %>
 		</div>
+		<% else %>
+		<div style="position:absolute; top:<%=@stepHeight * @row + 50%>px; left:<%=@width * @col%>%; width:<%=@width%>%; height:20px; text-align:center;">
+			<%= link_to "Download", Document.find(doc).attachment_url%>
+		</div>
 		<%end%>
 		<%@iterator = @iterator + 1%>
 		<%end%>
