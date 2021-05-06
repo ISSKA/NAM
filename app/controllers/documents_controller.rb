@@ -44,22 +44,25 @@ class DocumentsController < ApplicationController
 		if @document.save   
 			flash[:success] = "Successfully uploaded." 	
 			@id = @document.id
+			if @document.purpose == "asset_mission"
+				@asset_mission = AssetMission.find(@purpose_id)
+				@doc = ActiveRecord::Base.connection.exec_query("select images from asset_missions where id = #{@purpose_id}").rows[0][0]
+				(@doc == nil || @doc == 'NULL')? (@doc = "#{@id};"): (@doc = "#{@doc}#{@id};")
+				ActiveRecord::Base.connection.exec_query("update asset_missions set images = '#{@doc}' where id = #{@purpose_id}")
+				@url = missions_path + "/#{@asset_mission.mission_id}/asset_mission/#{@asset_mission.id}/edit"
+			end
+			if @document.purpose == "mission"
+				@mission = Mission.find(@purpose_id)
+				@doc = ActiveRecord::Base.connection.exec_query("select documents from missions where id = #{@purpose_id}").rows[0][0]
+				(@doc == nil || @doc == 'NULL')? (@doc = "#{@id};"): (@doc = "#{@doc}#{@id};")
+				ActiveRecord::Base.connection.exec_query("update missions set documents = '#{@doc}' where id = #{@purpose_id}")
+				@url = missions_path + "/#{@mission.id}/edit"
+			end
+			redirect_to @url + "?docId=#{@id}"
 		else   
 			flash[:danger] = "Problem with document."
+			render 'new'
 		end   
-		if @document.purpose == "asset_mission"
-			@asset_mission = AssetMission.find(@purpose_id)
-			ActiveRecord::Base.connection.exec_query("update asset_missions set img = #{@id} where id = #{@purpose_id}")
-			@url = missions_path + "/#{@asset_mission.mission_id}/asset_mission/#{@asset_mission.id}/edit"
-		end
-		if @document.purpose == "mission"
-			@mission = Mission.find(@purpose_id)
-			@doc = ActiveRecord::Base.connection.exec_query("select documents from missions where id = #{@purpose_id}").rows[0][0]
-			(@doc == nil || @doc == 'NULL')? (@doc = "#{@id};"): (@doc = "#{@doc}#{@id};")
-			ActiveRecord::Base.connection.exec_query("update missions set documents = '#{@doc}' where id = #{@purpose_id}")
-			@url = missions_path + "/#{@mission.id}/edit"
-		end
-		redirect_to @url + "?docId=#{@id}"
 	end   
       
 	def destroy   
@@ -68,7 +71,13 @@ class DocumentsController < ApplicationController
 		@purpose_id = params[:purpose_id]
 		if @purpose == "asset_mission"
 			@asset_mission = AssetMission.find(@purpose_id)
-			ActiveRecord::Base.connection.exec_query("update asset_missions set img = NULL where id = #{@purpose_id}")
+			@doc = ActiveRecord::Base.connection.exec_query("select images from asset_missions where id = #{@purpose_id}").rows[0][0]
+			@doc = "#{@doc}"
+			@doc["#{params[:id]};"] = ''
+			if @doc == ''
+				@doc = 'NULL'
+			end
+			ActiveRecord::Base.connection.exec_query("update asset_missions set images = '#{@doc}' where id = #{@purpose_id}")
 			@document.destroy   
 		end
 		if @purpose == "mission"
@@ -79,7 +88,6 @@ class DocumentsController < ApplicationController
 			if @doc == ''
 				@doc = 'NULL'
 			end
-			puts "on a doc = #{@doc}"
 			ActiveRecord::Base.connection.exec_query("update missions set documents = '#{@doc}' where id = #{@purpose_id}")
 			@document.destroy   
 		end

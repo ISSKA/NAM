@@ -1,36 +1,21 @@
-<div class="container">   
-<% if !@document.errors.empty? %>   
-   <div>   
-         
-      <ul>   
-         <% @document.errors.full_messages.each do |msg| %>   
-            <li><%= msg %></li>   
-         <% end %>   
-<div class="container">   
-<% if !@document.errors.empty? %>   
-   <div>   
-         
-      <ul>   
-         <% @document.errors.full_messages.each do |msg| %>   
-            <li><%= msg %></li>   
-         <% end %>      </ul>   
-         
-   </div>   
+<%= form_for @document, html: { multipart: true } do |f| %>  
+	<% if !@document.errors.empty? %>   
+		<div>   
+			<ul>   
+				<% @document.errors.full_messages.each do |msg| %>   
+				<li><%= msg %></li>   
+				<% end %>     
+			</ul>     
+		</div>   
+	<% end %> 
+	<%= f.hidden_field :purpose, :value => @document.purpose %>
+	<%= f.hidden_field :file_type, :value => @document.file_type %>
+	<%= f.hidden_field :parent_id, :value => @document.parent_id %>
+	<%= f.label :name %>   
+	<%= f.text_field :name %>   
+	<br><br>   
+	<%= f.label :attachment %>   
+	<%= f.file_field :attachment %>   
+	<br>    
+	<%= f.button 'Save', type: 'submit' %>
 <% end %>   
-<% end %> 
-  
-<div>   
-   <%= form_for @document, html: { multipart: true } do |f| %>   
-	  <%= f.hidden_field :purpose, :value => @document.purpose %>
-		<%= f.hidden_field :file_type, :value => @document.file_type %>
-		<%= f.hidden_field :parent_id, :value => @document.parent_id %>
-      <%= f.label :name %>   
-      <%= f.text_field :name %>   
-      <br><br>   
-      <%= f.label :attachment %>   
-      <%= f.file_field :attachment %>   
-      <br>    
-	  <%= f.button 'Save', type: 'submit' %>
-   <% end %>   
-</div>   
-</div> 

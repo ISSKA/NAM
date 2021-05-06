@@ -1,0 +1,41 @@
+<div style="position:relative; top:0px; left:0px; width:100%; height:70px;">
+	<% if(edit_mode) %>
+	<div style="position:absolute; top:0px; left:0px; width:75%; height:70px; overflow:auto;">
+	<% else %>
+	<div style="position:absolute; top:0px; left:0px; width:100%; height:70px; overflow:auto;">
+	<% end %>
+		<%@width = 20
+		@height = 30
+		@nbCol = 100/@width
+		if(!edit_mode)
+			@width = 200
+			@nbCol = 4
+		end
+		@stepHeight = 80
+		@iterator = 0%>
+		<%@imgs = @asset_mission.images.split(';').each do |img|%>
+		<%@col = @iterator%@nbCol
+		@row = @iterator/@nbCol%>
+		<div style="position:absolute; top:<%=@stepHeight * @row%>px; left:<%=@width * @col%>%; width:<%=@width%>%; height:20px; text-align:center;">
+			<%= Document.find(img).name%>
+		</div>
+		<div style="position:absolute; top:<%=@stepHeight * @row + 20%>px; left:<%=@width * @col%>%; width:<%=@width%>%; height:30px; text-align:center;">
+			<a href="<%= Document.find(img).attachment %>">
+				<img src="<%= Document.find(img).attachment %>" style="max-width:100%; max-height:30px;"></img>
+			</a>
+			
+		</div>
+		<% if edit_mode %>
+		<div style="position:absolute; top:<%=@stepHeight * @row + 50%>px; left:<%=@width * @col%>%; width:<%=@width%>%; height:20px; text-align:center;">
+			<%= link_to "Remove image", documents_destroy_path + "?id=#{img}&purpose=asset_mission&purpose_id=#{@asset_mission.id}" %>
+		</div>
+		<%end%>
+		<%@iterator = @iterator + 1%>
+		<%end%>
+	</div>
+	<% if edit_mode %>
+	<div style="position:absolute; top:20px; left:80%; width:20%; height:30px; text-align:center;">
+		<%= link_to "Add Image", new_document_path + "?file_type=image&purpose=asset_mission&id=#{@asset_mission.id}" %>
+	</div>
+	<% end %>
+</div>
