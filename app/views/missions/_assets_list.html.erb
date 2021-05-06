@@ -43,8 +43,8 @@
       -
       <% end %>
     </td>
-    <td>
-	  <% if asset_mission.images != nil %>
+    <td style="width:10%;">
+		<% if asset_mission.images != nil %>
 			<% if asset_mission.images != "NULL" and asset_mission.images != "nil"%>
 				<%@asset_mission = asset_mission%>
 				<%= render '/asset_mission/display_img', edit_mode: false  %>

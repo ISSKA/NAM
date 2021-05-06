@@ -8,7 +8,7 @@
 		@height = 30
 		@nbCol = 100/@width
 		if(!edit_mode)
-			@width = 200
+			@width = 80
 			@nbCol = 4
 		end
 		@stepHeight = 80
@@ -21,7 +21,11 @@
 		</div>
 		<div style="position:absolute; top:<%=@stepHeight * @row + 20%>px; left:<%=@width * @col%>%; width:<%=@width%>%; height:30px; text-align:center;">
 			<a href="<%= Document.find(img).attachment %>">
-				<img src="<%= Document.find(img).attachment %>" style="max-width:100%; max-height:30px;"></img>
+				<% if(edit_mode) %>
+				<img src="<%= Document.find(img).attachment %>" style="max-width:100%;  max-height:30px;"></img>
+				<% else %>
+				<img src="<%= Document.find(img).attachment %>" style="max-width:100%;  max-height:50px;"></img>
+				<% end %>
 			</a>
 			
 		</div>
