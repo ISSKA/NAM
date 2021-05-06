@@ -33,9 +33,6 @@ class MissionsController < ApplicationController
 				@missions = Mission.all.order('starting_date desc', 'ending_date desc')
 			end
 		end
-		
-		ActiveRecord::Base.connection.exec_query("update asset_missions set images = img where img is not null")
-		ActiveRecord::Base.connection.exec_query("update asset_missions set images = CONCAT(images,';') where img is not null")
   end
 
   def new
